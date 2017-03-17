@@ -1,8 +1,9 @@
-package Chapter2_LinkedLists.MyLinkedList.Q2_1; /**
+package Chapter2_LinkedLists.Q2_1; /**
  * Created by selimkonuk on 17/03/2017.
  */
 
-import Chapter2_LinkedLists.MyLinkedList.MyLinkedList;
+import Chapter2_LinkedLists.MyLinkedList;
+
 import java.util.HashSet;
 
 

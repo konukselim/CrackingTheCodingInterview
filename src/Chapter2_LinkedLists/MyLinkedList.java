@@ -1,4 +1,4 @@
-package Chapter2_LinkedLists.MyLinkedList; /**
+package Chapter2_LinkedLists; /**
  * Created by selimkonuk on 17/03/2017.
  */
 
