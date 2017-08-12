@@ -2,66 +2,55 @@ package Chapter3_StacksAndQueues;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * Created by selimkonuk on 29/07/2017.
  */
 public class MyQueue<T> {
 
-    private List<T> queue;
-    private int size;
+    private static class Node<T>{
+        public T item;
+        public Node next;
 
-    public MyQueue(){
-        queue = new ArrayList<T>();
-        size = 0;
+        public Node(T item){
+            this.item = item;
+        }
     }
 
+    private Node<T> front;
+    private Node<T> back;
+
     public boolean isEmpty(){
-        if(size == 0){
-            return true;
-        }
-        return false;
+        return (front == null);
     }
 
     public T front(){
+        if(isEmpty())
+            throw new NoSuchElementException();
+        return front.item;
+    }
+
+    public void enqueue(T item ){
+        Node<T> node = new Node<T>(item);
+
         if(isEmpty()){
-            return null;
+            back = node;
+            front = node;
         }
-        return queue.get(0);
-    }
-
-    public void enqueue(T item){
-        queue.add(item);
-        size++;
-    }
-
-    public void dequeue(){
-        if(!isEmpty()){
-            queue.remove(0);
-            size--;
+        else{
+            back.next = node;
+            back = node;
         }
     }
 
-    public void print(){
-        if(!isEmpty()){
-            for(int i=size-1; i> 0 ;i--)
-                System.out.print(queue.get(i) + " - ");
-            System.out.print(queue.get(0));
-            System.out.println();
-        }
-    }
+    public T dequeue(){
+        if(isEmpty())
+            throw new NoSuchElementException();
 
-    public static void main(String args[]){
-        MyQueue<Integer> _myqueue = new MyQueue<>();
-        _myqueue.enqueue(1);
-        _myqueue.enqueue(2);
-        _myqueue.enqueue(3);
-        _myqueue.enqueue(4);
-        _myqueue.enqueue(5);
-        _myqueue.print();
-        System.out.println(_myqueue.front());
-
-
+        T val = front.item;
+        front = front.next;
+        return val;
     }
 
 }

@@ -1,6 +1,7 @@
 package Chapter3_StacksAndQueues;
 
 import java.util.ArrayList;
+import java.util.EmptyStackException;
 import java.util.List;
 
 /**
@@ -8,49 +9,40 @@ import java.util.List;
  */
 public class MyStack<T> {
 
-    private List<T> stack;
-    private int size;
+    private static class Node<T>{
 
-    public MyStack(){
-        stack = new ArrayList<T>();
-        size = 0;
+        private T item;
+        private Node<T> next;
+
+        public Node(T item){
+            this.item = item;
+        }
     }
 
+    private Node<T> top;
+
     public boolean isEmpty(){
-        if(size == 0)
-            return true;
-        return false;
+        return (top == null);
     }
 
     public T top(){
-        if(size == 0){
-            return null;
-        }
-        return stack.get(size-1);
+        if(isEmpty())
+            throw new EmptyStackException();
+        return top.item;
     }
 
     public void push(T item){
-        stack.add(item);
-        size++;
+        Node<T> node = new Node<T>(item);
+        node.next = top;
+        top = node;
     }
 
-    public void pop(){
-        if(size != 0){
-            stack.remove(size-1);
-            size--;
-        }
-    }
-
-    public T topAndPop(){
-        T top = top();
-        pop();
-        return top;
-    }
-
-    public void print(){
-        for(int i= size-1; i>= 0 ;i--){
-            System.out.println(stack.get(i));
-        }
+    public T pop(){
+        if(isEmpty())
+            throw new EmptyStackException();
+        T val = top();
+        top = top.next;
+        return val;
     }
 
 }
